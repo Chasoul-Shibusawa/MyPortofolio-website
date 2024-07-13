@@ -74,7 +74,9 @@ body {
     line-height: var(--line-height-normal);
     background: var(--black);
     overflow-x: hidden;
+    overflow-y: hidden; /* Prevents vertical scrolling */
 }
+
 
 .row {
     max-width: var(--container-max-width);

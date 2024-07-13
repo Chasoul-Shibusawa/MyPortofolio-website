@@ -8,36 +8,133 @@
   <meta name="description" content="Add small description of yourself.">
   <meta name="keywords" content="Put your name, skills and some coding keywords">
   <link rel="stylesheet" href="index.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <style>
     /* CSS untuk Posisi Tengah */
     .header__text-box {
-        display: flex;
-        justify-content: center; /* Mengatur teks menjadi di tengah horizontal */
-        align-items: center; /* Mengatur teks menjadi di tengah vertikal */
-        height: 100%; /* Membuat box setinggi header */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      animation: fadeIn 2s ease-out;
     }
 
     .header__text {
-        text-align: center; /* Mengatur teks menjadi di tengah horizontal */
-    }
-
-    /* CSS untuk Teks di Header */
-    .header__text {
-        max-width: var(--container-medium-width);
-        font-family: 'Jost', sans-serif;
-        font-size: var(--font-size-medium);
-        color: var(--white); /* Menambahkan warna teks */
-    }
-
-    /* CSS untuk Alert */
-    .alert {
-      display: none; /* Sembunyikan pesan peringatan secara default */
-      padding: 10px;
-      background-color: #f44336; /* Warna latar merah */
-      color: white; /* Warna teks putih */
       text-align: center;
-      margin-bottom: 15px;
+      max-width: var(--container-medium-width);
+      font-family: 'Jost', sans-serif;
+      font-size: var(--font-size-medium);
+      color: var(--white);
+      animation: slideIn 1s ease-out forwards;
     }
+
+    .heading-primary {
+      font-size: 2.5rem;
+      animation: slideUp 1s ease-out forwards;
+    }
+
+    .btn--shared {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: rgb(255, 255, 255);
+      background-color: rgb(196, 47, 72);
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .btn--shared:hover {
+      background-color: darkpink;
+      transform: scale(1.05);
+    }
+
+    .btn--pink {
+      background-color: rgb(252, 78, 107);
+    }
+
+   
+    /* Dark theme for SweetAlert */
+    .swal2-popup {
+      background-color: rgba(0, 0, 0, 0.8) !important;
+      color: #000000 !important;
+      width: 500px !important;
+      max-width: 80%;
+    }
+
+    .swal2-title {
+      color: #fff !important;
+      font-weight: normal !important;
+    }
+
+    .swal2-content {
+      color: #000000 !important;
+      background-color: rgba(0, 0, 0, 0.3) !important;
+      border: none !important;
+    }
+
+    .swal2-actions .swal2-confirm {
+      display: none;
+      font-weight: normal !important;
+    }
+
+    .swal2-actions .swal2-cancel {
+      color: #fff !important;
+      background-color: #555 !important;
+      padding: 12px 24px !important;
+      font-size: 18px !important;
+      font-weight: normal !important;
+    }
+
+    .swal2-checkbox {
+      display: flex;
+      align-items: center;
+      color: #fff !important;
+      font-size: 15px;
+      background-color: transparent !important;
+      padding: 10px 0;
+    }
+
+    .swal2-checkbox label {
+      color: #fff !important;
+    }
+
+    .swal2-checkbox input[type="checkbox"] {
+      margin-right: 10px;
+      width: 15px;
+      height: 15px;
+    }
+
+    .btn--vip {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.btn--shared {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
 
   </style>
 </head>
@@ -51,51 +148,176 @@
     <div class="header__text-box row">
       <div class="header__text">
         <h1 class="heading-primary">
-          <span>Chasoul Access</span>
+          <h2>Chasoul Website <button class="btn btn--shared btn--vip" id="vipButton">VIP</button></h2>
         </h1>
-        <p>Follow my Instagram account to access the next page</p>
-        <a class="btn btn--pink" id="link1" href="https://www.instagram.com/chasoul.vsc/" target="_blank">My Instagram Account</a>
-        <br><br>
-        <a class="btn-proceed"  id="proceed" href="dashboard.html">Access to My Website</a>
+        <p>Welcome!! <br> Verify yourself first to access</p>
+        <button class="btn btn--shared" id="proceed">Access to My Website</button>
       </div>
     </div>
     <!-- Alert -->
-    <div class="alert" id="alert">
-      <!-- Pesan peringatan akan ditampilkan melalui CSS -->
-    </div>
+    <div class="alert" id="alert"></div>
   </header>
+
   <main role="main">
+    <!-- Konten utama Anda di sini -->
   </main>
-  
+
   <script>
-    // Ambil elemen-elemen yang diperlukan
-    var instagramLink = document.getElementById('link1');
-    var proceedLink = document.getElementById('proceed');
-    var alertBox = document.getElementById('alert');
+    document.getElementById('proceed').addEventListener('click', function() {
+      Swal.fire({
+        title: 'My lover is monitoring this website, please fill out your verification',
+        html: `
+          <div class="swal2-checkbox">
+            <input type="checkbox" id="male" name="gender" value="male">
+            <label for="male"> Male</label><br>
+            <input type="checkbox" id="female" name="gender" value="female">
+            <label for="female"> Female</label>
+          </div>`,
+        icon: 'info',
+        showCancelButton: false,
+        customClass: {
+          container: 'dark-mode'
+        },
+        allowOutsideClick: false,
+        preConfirm: () => {
+          const maleChecked = document.getElementById('male').checked;
+          const femaleChecked = document.getElementById('female').checked;
 
-    // Fungsi untuk menampilkan alert
-    function showAlert() {
-      alertBox.style.display = 'none'; // Sembunyikan alert
-    }
-
-    // Tambahkan event listener untuk tautan Instagram
-    instagramLink.addEventListener('click', function(event) {
-      // Tampilkan alert
-      showAlert();
-      // Set atribut 'aria-checked' pada tautan Instagram untuk menandai bahwa telah diklik
-      instagramLink.setAttribute('aria-checked', 'true');
-    });
-
-    // Tambahkan event listener untuk tautan Proceed
-    proceedLink.addEventListener('click', function(event) {
-      // Cek apakah tautan Instagram sudah diklik
-      if (instagramLink.getAttribute('aria-checked') !== 'true') {
-        // Hentikan tindakan default agar tautan tidak mengarahkan ke halaman berikutnya
-        event.preventDefault();
-        // Tampilkan pesan peringatan jika tautan Proceed diklik sebelum tautan Instagram
-        alert("Follow 'My Instagram Account' first.");
-      }
+          if (maleChecked) {
+            window.location.href = 'dashboard.html';
+            return Swal.fire({
+              title: 'Verification Successful!',
+              icon: 'success',
+              text: 'You may now access the website.'
+            });
+          } else if (femaleChecked) {
+            return Swal.fire({
+              title: 'Verification Failed',
+              icon: 'error',
+              text: 'Access denied.'
+            });
+          }
+        }
+      });
     });
   </script>
+
+  <script>
+  document.getElementById('vipButton').addEventListener('click', function() {
+    Swal.fire({
+      title: 'VIP Access Form',
+      html: `
+        <input type="password" id="password" name="password" placeholder="Enter password" class="swal2-input">
+        <textarea id="jsonInput" class="swal2-textarea" placeholder="Enter JSON data"></textarea>`,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      cancelButtonText: 'Cancel',
+      customClass: {
+        container: 'dark-mode'
+      },
+      preConfirm: () => {
+        const password = document.getElementById('password').value;
+        const jsonData = document.getElementById('jsonInput').value;
+
+        // Validate password and JSON input
+        if (!password || !jsonData) {
+          Swal.showValidationMessage(`Please fill out both fields.`);
+          return false;
+        }
+
+        // Simulate submission (replace with actual logic)
+        return fetch('your-backend-endpoint', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            password: password,
+            jsonData: JSON.parse(jsonData)
+          })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Submission Error',
+            text: `Failed to submit form: ${error}`
+          });
+        });
+      }
+    });
+  });
+</script>
+
+<script>
+  document.getElementById('vipButton').addEventListener('click', function() {
+    Swal.fire({
+      title: 'VIP Access Form',
+      html: `
+        <input type="password" id="password" name="password" placeholder="" class="swal2-input" style="color: white;" value="ciasayang">
+        <textarea id="jsonInput" class="swal2-textarea" placeholder="Enter JSON data" style="color: white;"></textarea>`,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      cancelButtonText: 'Cancel',
+      customClass: {
+        container: 'dark-mode'
+      },
+      preConfirm: () => {
+        const password = document.getElementById('password').value;
+        const jsonData = document.getElementById('jsonInput').value;
+
+        // Validate password and JSON input
+        if (password !== 'ciasayang') {
+          Swal.showValidationMessage(`Incorrect password. Access denied.`);
+          return false;
+        }
+        if (!jsonData) {
+          Swal.showValidationMessage(`Please fill out the JSON data field.`);
+          return false;
+        }
+
+        // Simulate submission (replace with actual logic)
+        return fetch('your-backend-endpoint', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            password: password,
+            jsonData: JSON.parse(jsonData)
+          })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Verification Successful!',
+            text: `You may now access the VIP area.`
+          });
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Submission Error',
+            text: `Failed to submit form: ${error}`
+          });
+        });
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
