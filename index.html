@@ -260,8 +260,8 @@
     Swal.fire({
       title: 'VIP Access Form',
       html: `
-        <input type="password" id="password" name="password" placeholder="" class="swal2-input" style="color: white;" value="ciasayang">
-        <textarea id="jsonInput" class="swal2-textarea" placeholder="Enter JSON data" style="color: white;"></textarea>`,
+        <input type="password" id="password" name="password" placeholder="user" class="swal2-input" style="color: white;" value="">
+        <textarea id="jsonInput" class="swal2-textarea" placeholder="VIP Key" style="color: white;"></textarea>`,
       icon: 'info',
       showCancelButton: true,
       confirmButtonText: 'Submit',
@@ -275,11 +275,11 @@
 
         // Validate password and JSON input
         if (password !== 'ciasayang') {
-          Swal.showValidationMessage(`Incorrect password. Access denied.`);
+          Swal.showValidationMessage(`Kamu bukan ayangkuu! hushhh sana`);
           return false;
         }
-        if (!jsonData) {
-          Swal.showValidationMessage(`Please fill out the JSON data field.`);
+        if (!jsonData !== 'ciasayang') {
+          Swal.showValidationMessage(`Apa hayooo`);
           return false;
         }
 
